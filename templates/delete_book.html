@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<table cellspacing="0" class="column-options">
+    <th>Book Name</th>
+    <th>Author</th>
+    <th>Category</th>
+    <th>Book Cover</th>
+    <th>Number of Reviews</th>
+    <th>Reviews</th>
+    <h4>Book List</h4>
+    {% for list in lists %}
+        <tr>
+        <td>{{ list.book_name }}</td>
+        <td>{{ list.Author}}</td>
+        <td>{{ list.Category}}</td>
+        <td><img src="{{ list.book_cover}}"></td>
+        <td>{{list['review']|length}}</td>
+        
+        <td>
+            <form action="/delete_book" method="post" role="form">
+                <input type="hidden" id="book_id" name="book_id" value="{{ list._id }}">
+                <input type="submit" name="submit" value="Delete Book" class="btn btn-info">
+            </form>
+        </td>
+   
+        <br>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

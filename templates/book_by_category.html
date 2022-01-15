@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<table cellspacing="0" class="column-options">
+    <th>BOOK NAME</th>
+    <th>AUTHOR</th>
+    <th>CATEGORY</th>
+    <th>BOOK COVER</th>
+    <th>NUMBER OF REVIEWS</th>
+    <th>REVIEWS</th>
+    <h4>BOOK LIST</h4>
+    {% for res in result_1 %}
+        
+        <tr>
+        <td>{{ res.book_name }}</td>
+        <td>{{ res.Author}}</td>
+        <td>{{ res.Category}}</td>
+        <td><img src="{{ res.book_cover}}"></td>
+        <td>{{res['review']|length}}</td>
+        
+        <td>
+            <form action="/view_add_review" method="post" role="form">
+                <input type="hidden" id="book_id" name="book_id" value="{{ res._id }}">
+                <input type="submit" name="submit" value="View/Add Review" class="btn btn-info">
+            </form>
+        </td>
+   
+        <br>
+        </tr>
+      
+        <br>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

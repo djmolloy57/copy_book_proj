@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h4>View and Add Review</h4>
+
+<table cellspacing="0" class="column-options">
+    <th>BOOK NAME</th>
+    <th>AUTHOR</th>
+    <th>CATEGORY</th>
+    <th>BOOK COVER</th>
+
+    {% for item in bk %}
+     
+        <tr>
+
+        <td>{{ item.book_name }}</td>
+        <td>{{ item.Author}}</td>
+        <td>{{ item.Category}}</td>
+        <td><img src="{{ item.book_cover}}"></td>
+        </tr>
+        <tr>
+          <td>
+          <h5>Book Summary:</h5>
+            {{ item.book_summary }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <h5>Book Reviews: </h5>
+            
+          <td>
+        </td>  
+            <!-- found out iteration in jinja at following site https://newbedev.com/how-to-increment-a-variable-on-a-for-loop-in-jinja-template-->
+            {% set count = namespace(value=0) %}
+            {% for i in item.review %}
+            <tr>   <td> <div id="editable{{loop.index}}" > <p>{{ item.review[count.value] }} </p> <a href="/update/{{item._id}}/{{ item.review[count.value] }}" class="btn-large light-blue">Edit Review</a> </div> </td> 
+            
+            </tr>
+              {% set count.value = count.value + 1 %}
+            {% endfor %}
+        
+        <tr>
+        <td> 
+          <form action="/write_review" method="post" role="form">
+            <input type="hidden" id="bookid" name="bookid" value="{{ item._id }}">
+            <input type="submit" name="Write submit" value="Write Review" class="btn btn-info">
+          </form>
+        </td>
+        </tr>
+    {% endfor %}
+    
+  </table>
+
+  
+{% endblock %}

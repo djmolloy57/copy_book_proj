@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+   <div class="container">
+	<h4>Update Review..</h4>
+        <br/>
+        <form action="/update/{{ review_bk_id }}/{{review_bk_update}}"
+         METHOD="POST">
+          <input type="text" placeholder="{{ review_bk_id }}" name="id" value="{{ review_bk_id }}">
+          <input type="text" placeholder="{{review_bk_update}}" name="review" value="{{review_bk_update}}">
+          <input type="submit" value="Update Review" class="btn btn-secondary">
+         </form>
+      </div>
+
+
+{% endblock %}

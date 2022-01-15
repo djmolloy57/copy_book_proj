@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<table cellspacing="0" class="column-options">
+    <th>BOOK NAME</th>
+    <th>AUTHOR</th>
+    <th>CATEGORY</th>
+    <th>BOOK COVER</th>
+    <th>NUMBER OF REVIEWS</th>
+    <th>REVIEWS</th>
+    <h4>BOOK LIST</h4>
+    {% for task in tasks %}
+        <tr>
+        <td>{{ task.book_name }}</td>
+        <td>{{ task.Author}}</td>
+        <td>{{ task.Category}}</td>
+        <td><img src="{{ task.book_cover}}"></td>
+        <td>{{task['review']|length}}</td>
+        
+        <td>
+            <form action="/view_add_review" method="post" role="form">
+                <input type="hidden" id="book_id" name="book_id" value="{{ task._id }}">
+                <input type="submit" name="submit" value="View/Add Review" class="btn btn-info">
+            </form>
+        </td>
+   
+        <br>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
